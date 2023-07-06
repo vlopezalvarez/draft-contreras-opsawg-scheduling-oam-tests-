@@ -1,6 +1,6 @@
 ---
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests"
+abbrev: "Network OAM sequences"
 category: info
 
 docname: draft-contreras-opsawg-scheduling-oam-tests-latest
@@ -25,9 +25,9 @@ venue:
 
 author:
  -
-    fullname: Your Name Here
-    organization: Your Organization Here
-    email: "vlopezalvarez@gmail.com"
+    fullname: Luis M. Contreras
+    organization: Telefonica
+    email: "luismiguel.contrerasmurillo@telefonica.com"
 
 normative:
 
