@@ -102,16 +102,11 @@ Please replace XXXX with the RFC number assigned to this document if the documen
 
 ## Troubleshooting
 
-After the detection of a problem in the network, OAM tests are performed to find the root cause for the detected issue. However, a problem detected 
-can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by 
-testing specific components of the network and looking for anomalies or issues.
+After the detection of a problem in the network, OAM tests are performed to find the root cause for the detected issue. However, a problem detected can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues.
 
-There are a variety of different OAM tests that can be executed depending on the nature of the scenario. For example, if the issue is related to a L2 
-capability, tests can be run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. 
-If these tests are correct, the operator may want to check the availability of the service or its performance.
+There are a variety of different OAM tests that can be executed depending on the nature of the scenario. For example, if the issue is related to a L2 capability, tests can be run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. If these tests are correct, the operator may want to check the availability of the service or its performance.
 
-Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logic that can be 
-executed in order to narrow down the cause of the problem.
+Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logic that can be executed in order to narrow down the cause of the problem.
 
 ## Birth certificate
 
