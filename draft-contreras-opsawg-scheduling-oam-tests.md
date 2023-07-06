@@ -1,6 +1,6 @@
 ---
 title: "A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests"
-abbrev: "Network OAM sequences"
+abbrev: "Scheduling OAM YANG"
 category: info
 
 docname: draft-contreras-opsawg-scheduling-oam-tests-latest
@@ -12,9 +12,9 @@ v: 3
 area: "Operations and Management"
 workgroup: "Operations and Management Area Working Group"
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - OAM
+ - Scheduling
+ - Test sequences
 venue:
   group: "Operations and Management Area Working Group"
   type: "Working Group"
@@ -70,7 +70,7 @@ Previous RFCs defined the parameters required for each of the different tests th
 
 The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
 
-## Terminology and Notations 
+## Terminology and Notations
 
 This document assumes that the reader is familiar with the contents of {{!RFC7950}}, {{!RFC8345}}, {{!RFC8346}} and {{!RFC8795}}.
 
@@ -110,7 +110,7 @@ Even though the troubleshooting process may be different depending on the proble
 
 ## Birth certificate
 
-The aim of a birth certificate process is to validate that all relevant parameters are correct for a specific network service. The birth certificate process is done once the configuration of the network elements is completed and they are ready for service. 
+The aim of a birth certificate process is to validate that all relevant parameters are correct for a specific network service. The birth certificate process is done once the configuration of the network elements is completed and they are ready for service.
 
 If the birth certificate is successful, it means that the network service is functioning correctly and meets the requirements defined by the operator. The process requires running a set of OAM tests to verify that the service is performing as expected.
 
@@ -126,7 +126,7 @@ Proactive testing ensures the SLAs are met. Proactive supervision requires runni
 
 Proactive testing can be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers.
 
-## Performance-based Path Routing 
+## Performance-based Path Routing
 
 Path Computation Elements (PCEs) allow computing end-to-end paths in a network. PCEs are used to facilitate traffic engineering and can be used to optimize network performance, reduce congestion, and improve the overall user experience.
 
