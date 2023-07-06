@@ -1,6 +1,6 @@
-# TODO - Your title
+# A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests
 
-This is the working area for the individual Internet-Draft, "TODO - Your title".
+This is the working area for the individual Internet-Draft, "A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests".
 
 * [Editor's Copy](https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-oam-tests/#go.draft-contreras-opsawg-scheduling-oam-tests.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-contreras-opsawg-scheduling-oam-tests)
