@@ -49,7 +49,9 @@ The YANG data model defined in this document conforms to the Network Management 
 
 # Introduction
 
-twork. The OAM framework defines mechanisms for fault detection and isolation, such as continuity check, link trace, and loopback.
+Operations, Administration, and Maintenance (OAM) tasks are fundamental functionalities of the network management. Given the emerging of data models and their utilization in Service Provider's management, the management of OAM tests represent also an area of interest for operators, which requires to be defined as a data model. OAM functionalities provide the means to identify and isolate faults, measure and report of performance. {{!RFC5860}} defines the three main areas involved in OAM:
+
+* Fault management, which allows network operators to quickly identify and isolate faults in the network. The OAM framework defines mechanisms for fault detection and isolation, such as continuity check, link trace, and loopback.
 + Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.
 - Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.
 
@@ -68,21 +70,105 @@ Previous RFCs defined the parameters required for each of the different tests th
 
 The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
 
+## Terminology and Notations 
 
-# Conventions and Definitions
+This document assumes that the reader is familiar with the contents of {{!RFC7950}}, {{!RFC8345}}, {{!RFC8346}} and {{!RFC8795}}.
 
-{::boilerplate bcp14-tagged}
+Following terms are used for the representation of this data model.
+
+* OAM unitary test: it is a set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.
+
+* OAM test sequence: it is a set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.
+
+## Requirements Language
+
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in  {{!RFC2119}}, {{!RFC8174}} when, and only when, they appear in all capitals, as shown here.
+
+## Prefix in Data Node Names
+
+  In this document, names of data nodes and other data model objects will be prefixed using the standard prefix associated with the corresponding YANG imported modules, as shown in the following table.
+
+| Prefix | Yang Module            | Reference    |
+| ------ | ---------------------- | ------------ |
+| oamut  | ietf-oam-unitary-tests | RFCXXX       |
+| oamts  | ietf-oam-test-sequence | RFCXXX       |
+| yang   | ietf-yang-types        | {{!RFC6991}} |
+{: #tab-prefixes title="Prefixes and corresponding YANG modules"}
+
+RFC Editor Note:
+Please replace XXXX with the RFC number assigned to this document if the document becomes a RFC. Please remove this note in that case.
+
+# Network wide OAM use cases
+
+## Troubleshooting
+
+After the detection of a problem in the network, OAM tests are performed to find the root cause for the detected issue. However, a problem detected 
+can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by 
+testing specific components of the network and looking for anomalies or issues.
+
+There are a variety of different OAM tests that can be executed depending on the nature of the scenario. For example, if the issue is related to a L2 
+capability, tests can be run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. 
+If these tests are correct, the operator may want to check the availability of the service or its performance.
+
+Even though the troubleshooting process may be different depending on the problem detected, there are certain common procedures or logic that can be 
+executed in order to narrow down the cause of the problem.
+
+## Birth certificate
+
+The aim of a birth certificate process is to validate that all relevant parameters are correct for a specific network service. The birth certificate process is done once the configuration of the network elements is completed and they are ready for service. 
+
+If the birth certificate is successful, it means that the network service is functioning correctly and meets the requirements defined by the operator. The process requires running a set of OAM tests to verify that the service is performing as expected.
+
+The set of OAM tests done as part of a birth certificate process depends on the network service that is tested. For example, if the service is a virtual private network (VPN) Two-Way Active Measurement Protocol (TWAMP) Light will be used, while if the service is an E-LINE, Ethernet CFM tests will be executed.
+
+Once the birth certificate process has been completed and the OAM tests have been run, the test results are stored as part of the documentation process performed by the operator.
+
+## Proactive supervision
+
+There are communication services that require to fulfill Service Level Agreements (SLAs). SLAs define performance parameters that the service must fulfill in order to meet the requirements of the customer or end user.
+
+Proactive testing ensures the SLAs are met. Proactive supervision requires running tests on service components to identify and resolve issues before they impact the customer or end user, or to minimize the impact of the end user.
+
+Proactive testing can be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers.
+
+## Performance-based Path Routing 
+
+Path Computation Elements (PCEs) allow computing end-to-end paths in a network. PCEs are used to facilitate traffic engineering and can be used to optimize network performance, reduce congestion, and improve the overall user experience.
+
+There are different algorithms to calculate a path in the network for some of them the PCE requires traffic engineering information. TE information includes data such as link metrics, bandwidth availability, and routing constraints. By using this information, the PCE can compute the optimal path for a particular service, taking into account its constraints and requirements. OAM techniques allow obtaining link metrics like delay and loss which can be used in the PCE algorithms.
+
+# YANG Data Model for scheduling OAM Tests
+
+
+## YANG Model Overview
+
+TBC
+
+## Tree Diagram for scheduling OAM Tests
+
+TBC
+
+## YANG Model for scheduling OAM Tests
+
+TBC
 
 
 # Security Considerations
 
-TODO Security
+The YANG module targeted in this document defines a schema for data that is designed to be accessed via network management protocols such as NETCONF {{!RFC6241}} or RESTCONF {{!RFC8040}}.  The lowest NETCONF layer is the secure transport layer, and the mandatory-to-implement secure transport is Secure Shell (SSH) {{!RFC6242}}. The lowest RESTCONF layer is HTTPS, and the mandatory-to-implement secure transport is TLS {{!RFC5246}}.
+
+The NETCONF access control model {{!RFC6536}} provides the means to restrict access for particular NETCONF or RESTCONF users to a preconfigured subset of all available NETCONF or RESTCONF protocol operations and content.
+
+There are a number of data nodes defined in this YANG module that are writable/creatable/deletable (i.e., config true, which is the default).  These data nodes may be considered sensitive or vulnerable   in some network environments.  Write operations (e.g., edit-config) to these data nodes without proper protection can have a negative effect on network operations.
 
 
 # IANA Considerations
 
-This document has no IANA actions.
+TBC
 
+# Implementation Status
+
+This section will be used to track the status of the implementations of the model. It is aimed at being removed if the document becomes RFC.
 
 --- back
 
