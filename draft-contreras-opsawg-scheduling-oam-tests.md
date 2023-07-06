@@ -49,7 +49,24 @@ The YANG data model defined in this document conforms to the Network Management 
 
 # Introduction
 
-TODO Introduction
+twork. The OAM framework defines mechanisms for fault detection and isolation, such as continuity check, link trace, and loopback.
++ Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.
+- Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.
+
+{{!RFC6428}} defines several use cases for OAM tools, including:
+
+* Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
++ Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes.
++ Link Trace: This function allows a network operator to trace a path through a network from one device to another.
++ Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues.
++ Security Management: This function allows a network operator to protect OAM communications from unauthorized access and tampering.
+- Configuration Management: This function allows a network operator to manage the configuration of network devices.
+
+On one hand {{!RFC8531}}, {{!RFC8532}} and, {{!RFC8533}} defined YANG models for OAM technologies. On the other hand, {{!RFC8531}} defines a YANG data model for connection-oriented OAM protocols. The main aim of this document is to define a generic YANG data model that can be used to configure, control and monitor connection-oriented OAM protocols such as MPLS-TP OAM, PBB-TE OAM, and G.7713.1 OAM. {{!RFC8532}} provides a generic YANG data model that can be used to configure, control and monitor connectionless OAM protocols such as BFD (Bidirectional Forwarding Detection), LBM (Loopback Messaging) and VCCV (Virtual Circuit Connectivity Verification). {{!RFC8533}} provides a YANG data model that can be used to retrieve information related to OAM protocols such as Bidirectional Forwarding Detection (BFD), Loopback Messaging (LBM) and Virtual Circuit Connectivity Verification (VCCV).
+
+Previous RFCs defined the parameters required for each of the different tests that are used in network elements today. This document covers how to use OAM for network-wide use cases. Following, some illustrative examples are presented.
+
+The YANG data model resulting from this document will conform to the Network Management Datastore Architecture (NMDA) {{!RFC8342}}.
 
 
 # Conventions and Definitions
