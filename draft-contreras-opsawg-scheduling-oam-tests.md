@@ -182,7 +182,7 @@ module: ietf-oam-unitary-test
 The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. The state machine includes the following states:
 
 * "planned": The initial state where the test is planned.
-* "configure": The state where the test is being configured.
+* "configured": The state where the test is being configured.
 * "ready": The state where the test is ready to be executed.
 * "on-going": The state where the test is currently running.
 * "stop": The state where the test is manually stopped.
@@ -264,7 +264,7 @@ module: ietf-oam-test-sequence
 The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine includes the following states:
 
 * "planned": The initial state where the test is planned.
-* "configure": The state where the test is being configured.
+* "configured": The state where the test is being configured.
 * "ready": The state where the test is ready to be executed.
 * "on-going": The state where the test is currently running.
 * "stop": The state where the test is manually stopped.
