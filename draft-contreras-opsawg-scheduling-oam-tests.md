@@ -179,6 +179,38 @@ module: ietf-oam-unitary-test
 ~~~~
 {: #oam-uni-test-tree-st title="OAM unitary test" artwork-align="center"}
 
+The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. The state machine includes the following states:
+
+* "planned": The initial state where the test is planned.
+* "configure": The state where the test is being configured.
+* "ready": The state where the test is ready to be executed.
+* "on-going": The state where the test is currently running.
+* "stop": The state where the test is manually stopped.
+* "error": The state where an error occurs during the test.
+* "finished": The final state where the test is completed.
+
+~~~~
+
+   +---------+      +----------+      +---------+
++->| planned |----->|configured|----->|  ready  |
+|  +---------+      +----------+      +---------+
+|      A                 |                |
+|      |                 |                V
+|      |     +-------+   |          +----------+
+|      ------| error |<--+----------| on-going |
+|      |     +-------+              +----------+
+|      |                                  |
+|      V                                  |
+|  +---------+      +--------+            |
++--| finished|<-----|  stop  |<------------+
+   +---------+      +--------+            |
+       A                                  |
+       |                                  |
+       +----------------------------------+
+
+~~~~
+{: #st-unitary-test-status title="OAM unitary test state machine" artwork-align="center"}
+
 ## OAM test sequence
 
 The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner. Each OAM test sequence references a OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.draft-ma-opsawg-ucl-acl}}. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.
@@ -223,10 +255,45 @@ module: ietf-oam-test-sequence
         |  +--rw byyearmonth*   uint32
         |  +--rw bysetpos*      int32
         |  +--rw wkst?          schedule:weekday
-        +--ro test-squence-status?   enumeration
+        +--ro sequence?   enumeration
 
 ~~~~
-{: #oam-test-sequence-tree-st title="OAM test sequence" artwork-align="center"}
+{: #oam-sequence title="OAM test sequence" artwork-align="center"}
+
+
+The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine includes the following states:
+
+* "planned": The initial state where the test is planned.
+* "configure": The state where the test is being configured.
+* "ready": The state where the test is ready to be executed.
+* "on-going": The state where the test is currently running.
+* "stop": The state where the test is manually stopped.
+* "success": The success state when all unitary tests were successful.
+* "failure": The success state when One or more tests in the sequence got an error.
+* "error": The state where an error occurs during the test.
+
+~~~~
+
+    +---------+      +----------+      +---------+
+ +->| planned |----->|configured|----->|  ready  |
+ |  +---------+      +----------+      +---------+
+ |    A   A                 |              |
+ |    |   |                 |              V
+ |    |   |     +-------+   |          +----------+
+ |    |   ------| error |<--+----------| on-going |
+ |    |         +-------+              +----------+
+ |    |                                    |
+ |    |                                    |
+ | +---------+      +--------+             |
+ | | failure |<-----|  stop  |<------------+
+ | +---------+      +--------+             |
+ |                                         |
+ | +---------+                             |
+ +-| success |<----------------------------+
+   +---------+
+
+~~~~
+{: #st-test-sequence-status title="OAM unitary test state machine" artwork-align="center"}
 
 
 # YANG Data Model for Scheduling OAM Tests
@@ -326,8 +393,11 @@ module ietf-oam-unitary-test {
           enum "planned" {
             description "The test is planned.";
           }
-          enum "deployed" {
-            description "The test is deployed.";
+          enum "configure" {
+            description "The test is configured.";
+          }
+          enum "ready" {
+            description "The test status is ready.";
           }
           enum "ongoing" {
             description "The test is ongoing.";
@@ -335,14 +405,11 @@ module ietf-oam-unitary-test {
           enum "stop" {
             description "The test is stopped.";
           }
-          enum "unknown" {
-            description "The test status is unknown.";
-          }
-          enum "failed" {
-            description "The test has failed.";
-          }
           enum "finish" {
             description "The test is finished.";
+          }
+          enum "error" {
+            description "The test has an error.";
           }
         }
         description "Status of the test.";
