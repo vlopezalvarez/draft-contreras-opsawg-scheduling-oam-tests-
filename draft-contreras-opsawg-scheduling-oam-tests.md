@@ -3,7 +3,7 @@ title: "A YANG Data Model for Network Diagnosis by scheduling sequences of OAM t
 abbrev: "Scheduling OAM YANG"
 category: info
 
-docname: draft-contreras-opsawg-scheduling-oam-tests-latest
+docname: draft-contreras-opsawg-scheduling-oam-tests-01
 submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
 number:
 date:
