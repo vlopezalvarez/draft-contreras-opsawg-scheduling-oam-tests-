@@ -139,7 +139,7 @@ This document proposes two models: OAM unitary test and OAM test sequence models
 
 The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of the scope of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.draft-ma-opsawg-ucl-acl}}. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM unitary test.
 
-{#oam-uni-test-tree-st} contains the tree of the proposed model.
+{{oam-uni-test-tree-st}} contains the tree of the proposed model.
 
 ~~~~
 module: ietf-oam-unitary-test
@@ -258,7 +258,7 @@ module: ietf-oam-test-sequence
         +--ro sequence?   enumeration
 
 ~~~~
-{: #oam-sequence title="OAM test sequence" artwork-align="center"}
+{: #oam-test-sequence-tree-st title="OAM test sequence" artwork-align="center"}
 
 
 The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine includes the following states:
