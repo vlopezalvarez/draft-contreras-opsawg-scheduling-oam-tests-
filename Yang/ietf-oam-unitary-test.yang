@@ -4,20 +4,23 @@ module ietf-oam-unitary-test {
   prefix "oamut";
 
   // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
-  import ietf-schedule { prefix "schedule"; } // reference draft-ma-opsawg-ucl-acl
+
+  // reference draft-ma-opsawg-ucl-acl
+  import ietf-schedule { prefix "schedule"; }
 
   organization
     "IETF OPSAWG (Operations and Management Area Working Group)";
- 
+
   contact
     "WG Web:   <https://datatracker.ietf.org/wg/opsawg/>
      WG List:  <mailto:opsawg@ietf.org>
      Author: Luis Miguel Contreras Murillo
           <luismiguel.contrerasmurillo@telefonica.com>
      Author: Victor Lopez
-          <victor.lopez@nokia.com>";          
-  description 
-    "This module defines the 'ietf-oam-unitary-test' YANG model for activation of network diagnosis procedures.
+          <victor.lopez@nokia.com>";
+  description
+    "This module defines the 'ietf-oam-unitary-test' YANG model for
+     activation of network diagnosis procedures.
 
     Copyright (c) 2023 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -39,15 +42,18 @@ module ietf-oam-unitary-test {
   // this note.
 
   revision "2023-07-10" {
-    description 
+    description
       "Initial version";
-    reference 
-      "RFCXXXX: A YANG Data Model for Network Diagnosis by scheduling sequences of OAM tests"; // Update with the correct RFC number when assigned
+    reference
+      "RFCXXXX: A YANG Data Model for Network Diagnosis by Scheduling
+       Sequences of OAM Tests";
+       // Update with the correct RFC number when assigned
   }
 
   grouping oam-unitary-test {
     description
-        "This grouping is defined for OAM unitary test for network diagnosis procedures.";
+        "This grouping is defined for OAM unitary test for network
+        diagnosis procedures.";
 
     leaf name {
       type string;
@@ -64,13 +70,15 @@ module ietf-oam-unitary-test {
   }
 
   container oam-unitary-tests {
-    description 
-      "Container for OAM unitary tests activation for network diagnosis procedures.";
+    description
+      "Container for OAM unitary tests activation for network diagnosis
+      procedures.";
 
     list oam-unitary-test {
       key name;
       description
-        "List of OAM unitary tests activation for network diagnosis procedures.";
+        "List of OAM unitary tests activation for network diagnosis
+        procedures.";
 
       uses oam-unitary-test;
 
@@ -81,28 +89,36 @@ module ietf-oam-unitary-test {
       leaf unitary-test-status {
         type enumeration {
           enum "planned" {
-            description "The test is planned.";
+            description
+              "The test is planned.";
           }
           enum "configure" {
-            description "The test is configured.";
+            description
+              "The test is configured.";
           }
           enum "ready" {
-            description "The test status is ready.";
+            description
+              "The test status is ready.";
           }
           enum "ongoing" {
-            description "The test is ongoing.";
+            description
+              "The test is ongoing.";
           }
           enum "stop" {
-            description "The test is stopped.";
+            description
+              "The test is stopped.";
           }
           enum "finish" {
-            description "The test is finished.";
+            description
+              "The test is finished.";
           }
           enum "error" {
-            description "The test has an error.";
+            description
+              "The test has an error.";
           }
         }
-        description "Status of the test.";
+        description
+          "Status of the test.";
       }
     }
   }

@@ -5,11 +5,13 @@ module ietf-oam-test-sequence {
 
   import ietf-oam-unitary-test {
     prefix "oamut";
-    // Update the reference with the correct RFC number or other reference when assigned
-    //reference "RFCXXXX";
+    // Update the reference with the correct RFC number or other
+    // reference when assigned
+    // reference "RFCXXXX";
   }
 
-  import ietf-schedule { prefix "schedule"; } // reference draft-ma-opsawg-ucl-acl
+  // reference draft-ma-opsawg-ucl-acl
+  import ietf-schedule { prefix "schedule"; }
 
   organization
     "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -22,7 +24,8 @@ module ietf-oam-test-sequence {
      Author: Victor Lopez
           <victor.lopez@nokia.com>";
   description
-    "This module defines the 'oam-unitary-test' YANG model for activation of network diagnosis procedures.
+    "This module defines the 'oam-unitary-test' YANG model for
+    activation of network diagnosis procedures.
 
     Copyright (c) 2023 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
@@ -51,7 +54,9 @@ module ietf-oam-test-sequence {
   // Data model definition
 
   container oam-test-sequence {
-    description "Container for executing a sequence of ietf-oam-unitary-tests N times.";
+    description
+      "Container for executing a sequence of ietf-oam-unitary-tests
+      N times.";
 
     list test-sequence {
       key "name";
@@ -71,7 +76,9 @@ module ietf-oam-test-sequence {
         leaf numexecutions {
           type uint32;
           default 1;
-          description "Number of times the test sequence should be executed.";
+          description
+            "Number of times the test sequence should be
+            executed.";
         }
       }
 
@@ -82,32 +89,41 @@ module ietf-oam-test-sequence {
       leaf test-sequence-status {
         type enumeration {
           enum "planned" {
-            description "The test sequence is planned.";
+            description
+              "The test sequence is planned.";
           }
           enum "configured" {
-            description "The test sequence is configured.";
+            description
+              "The test sequence is configured.";
           }
           enum "ready" {
-            description "The test sequence is ready.";
+            description
+              "The test sequence is ready.";
           }
           enum "ongoing" {
-            description "The test sequence status is ongoing.";
+            description
+              "The test sequence status is ongoing.";
           }
           enum "stop" {
-            description "The test sequenceis stopped.";
+            description
+              "The test sequenceis stopped.";
           }
           enum "success" {
-            description "All tests in the sequence were successful.";
+            description
+              "All tests in the sequence were successful.";
           }
           enum "failure" {
-            description "One or more tests in the sequence got an error.";
+            description
+              "One or more tests in the sequence got an error.";
           }
           enum "error" {
-            description "The test sequence status has an error.";
+            description
+              "The test sequence status has an error.";
           }
         }
-        config false;
-        description "Status of the test sequence execution.";
+
+        description
+          "Status of the test sequence execution.";
       }
     }
   }
