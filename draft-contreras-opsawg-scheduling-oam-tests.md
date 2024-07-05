@@ -139,7 +139,7 @@ This document proposes two models: OAM unitary test and OAM test sequence models
 
 The OAM unitary test model encompasses parameters that define a specific type of OAM test to be performed. The YANG model includes a container named "oam-unitary-tests" that serves as a container for activating OAM unitary tests for network diagnosis procedures. Inside the container, there is a list called "oam-unitary-test" representing a list of specific OAM unitary tests. The list key is defined as "name", which provides a unique name for each test. Each OAM test in the list references a test type with its concrete parameters. The test types are out of the scope of this document. Moreover, each OAM unitary test has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.draft-ma-opsawg-ucl-acl}}. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM unitary test.
 
-{{oam-uni-test-tree-st}} contains the tree of the proposed model.
+{{oam-uni-test-tree-st}} contains the tree of the proposed model. Tree diagrams used in this document follow the notation defined in {{!RFC8340}}.
 
 ~~~~
 module: ietf-oam-unitary-test
@@ -211,7 +211,7 @@ The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. 
 ~~~~
 {: #st-unitary-test-status title="OAM unitary test state machine" artwork-align="center"}
 
-## OAM test sequence
+## OAM Test Sequence
 
 The OAM test sequence model consists of a collection of OAM unitary tests that are executed based on specified time constraints, repetitions, ordering, and reporting outputs. These sequences provide a structured approach to running multiple OAM tests in a coordinated manner. Each OAM test sequence references a OAM unitary test type with its concrete parameters. Each OAM test sequence has two temporal parameters: "period-of-time" and "recurrence". Both are imported from the "ietf-schedule" module from {{!I-D.draft-ma-opsawg-ucl-acl}}. "period-of-time" identifies the period values that contain a precise period of time, while "recurrence" identifies the properties that contain a recurrence rule specification. "unitary-test-status" enumerates the state of the OAM test. Finally, "test-sequence-status" shows the state of the OAM test sequence.
 
@@ -296,10 +296,9 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 {: #st-test-sequence-status title="OAM unitary test state machine" artwork-align="center"}
 
 
-# YANG Data Model for Scheduling OAM Tests
+# YANG Data Models for Scheduling OAM Tests
 
-
-## YANG Model Overview
+## YANG Models Overview
 
 This document proposes two models: OAM unitary test and OAM test sequence. OAM unitary test is a set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results. The OAM test sequences are a set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.
 
@@ -321,6 +320,14 @@ This document proposes two models: OAM unitary test and OAM test sequence. OAM u
 
 <CODE ENDS>
 ~~~~~~~~~~
+
+# Using Device Mode Within OAM Scheduling Models
+
+This section discusses the problematic of reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:
+  * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desire OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.
+  * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.
+
+As an exmaple, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
 
 
 # Security Considerations

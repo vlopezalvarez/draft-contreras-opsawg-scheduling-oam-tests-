@@ -71,8 +71,8 @@ module ietf-oam-unitary-test {
 
   container oam-unitary-tests {
     description
-      "Container for OAM unitary tests activation for network diagnosis
-      procedures.";
+      "Container for OAM unitary tests activation for network
+      diagnosis procedures.";
 
     list oam-unitary-test {
       key name;

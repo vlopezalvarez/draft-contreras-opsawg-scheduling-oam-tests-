@@ -48,7 +48,8 @@ module ietf-oam-test-sequence {
 
   revision "2023-07-10" {
     description "Initial version";
-    reference "RFCXXXX"; // Update with the correct RFC number when assigned
+    reference "RFCXXXX";
+    // Update with the correct RFC number when assigned
   }
 
   // Data model definition
