@@ -10,7 +10,7 @@ module ietf-oam-test-sequence {
     // reference "RFCXXXX";
   }
 
-  // reference draft-ma-opsawg-ucl-acl
+  // reference ietf-netmod-schedule-yang
   import ietf-schedule { prefix "schedule"; }
 
   organization
@@ -27,7 +27,7 @@ module ietf-oam-test-sequence {
     "This module defines the 'oam-unitary-test' YANG model for
     activation of network diagnosis procedures.
 
-    Copyright (c) 2023 IETF Trust and the persons identified as
+    Copyright (c) 2024 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.
 
     Redistribution and use in source and binary forms, with or
@@ -46,7 +46,7 @@ module ietf-oam-test-sequence {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2023-07-10" {
+  revision "2024-07-05" {
     description "Initial version";
     reference "RFCXXXX";
     // Update with the correct RFC number when assigned
@@ -83,9 +83,9 @@ module ietf-oam-test-sequence {
         }
       }
 
-      uses schedule:period;
+      uses schedule:period-of-time;
 
-      uses schedule:recurrence;
+      uses schedule:recurrence-utc;
 
       leaf test-sequence-status {
         type enumeration {

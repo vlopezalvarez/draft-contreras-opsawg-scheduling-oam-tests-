@@ -147,37 +147,20 @@ The OAM unitary test model encompasses parameters that define a specific type of
 module: ietf-oam-unitary-test
   +--rw oam-unitary-tests
      +--rw oam-unitary-test* [name]
-        +--rw name                   string
+        +--rw name                      string
         +--rw (test-type)
-        +--rw period-of-time
-        |  +--rw (forms)?
-        |     +--:(period-explicit)
-        |     |  +--rw explicit-start?   yang:date-and-time
-        |     |  +--rw explicit-end?     yang:date-and-time
-        |     +--:(period-start)
-        |        +--rw start?            yang:date-and-time
-        |        +--rw duration?         duration
-        +--rw recurrence
-        |  +--rw freq           enumeration
-        |  +--rw (recurrence-bound)?
-        |  |  +--:(until)
-        |  |  |  +--rw until?   union
-        |  |  +--:(count)
-        |  |     +--rw count?   uint32
-        |  +--rw interval?      uint32
-        |  +--rw bysecond*      uint32
-        |  +--rw byminute*      uint32
-        |  +--rw byhour*        uint32
-        |  +--rw byday* [weekday]
-        |  |  +--rw direction*   int32
-        |  |  +--rw weekday      schedule:weekday
-        |  +--rw bymonthday*    int32
-        |  +--rw byyearday*     int32
-        |  +--rw byyearweek*    int32
-        |  +--rw byyearmonth*   uint32
-        |  +--rw bysetpos*      int32
-        |  +--rw wkst?          schedule:weekday
-        +--rw unitary-test-status?   enumeration
+        +--rw period-description?       string
+        +--rw period-start              yang:date-and-time
+        +--rw time-zone-identifier?     sys:timezone-name
+        +--rw (period-type)?
+        |  +--:(explicit)
+        |  |  +--rw period-end?         yang:date-and-time
+        |  +--:(duration)
+        |     +--rw duration?           duration
+        +--rw recurrence-description?   string
+        +--rw frequency                 identityref
+        +--rw interval?                 uint32
+        +--rw unitary-test-status?      enumeration
 ~~~~
 {: #oam-uni-test-tree-st title="OAM unitary test" artwork-align="center"}
 
@@ -224,40 +207,31 @@ An example of the proposed structure {{oam-test-sequence-tree-st}}.
 module: ietf-oam-test-sequence
   +--rw oam-test-sequence
      +--rw test-sequence* [name]
-        +--rw name                   string
+        +--rw name                      string
         +--rw test-ref* [name]
         |  +--rw name             string
         |  +--rw (test-type)
         |  +--rw numexecutions?   uint32
-        +--rw period-of-time
-        |  +--rw (forms)?
-        |     +--:(period-explicit)
-        |     |  +--rw explicit-start?   yang:date-and-time
-        |     |  +--rw explicit-end?     yang:date-and-time
-        |     +--:(period-start)
-        |        +--rw start?            yang:date-and-time
-        |        +--rw duration?         duration
-        +--rw recurrence
-        |  +--rw freq           enumeration
-        |  +--rw (recurrence-bound)?
-        |  |  +--:(until)
-        |  |  |  +--rw until?   union
-        |  |  +--:(count)
-        |  |     +--rw count?   uint32
-        |  +--rw interval?      uint32
-        |  +--rw bysecond*      uint32
-        |  +--rw byminute*      uint32
-        |  +--rw byhour*        uint32
-        |  +--rw byday* [weekday]
-        |  |  +--rw direction*   int32
-        |  |  +--rw weekday      schedule:weekday
-        |  +--rw bymonthday*    int32
-        |  +--rw byyearday*     int32
-        |  +--rw byyearweek*    int32
-        |  +--rw byyearmonth*   uint32
-        |  +--rw bysetpos*      int32
-        |  +--rw wkst?          schedule:weekday
-        +--ro sequence?   enumeration
+        +--rw period-description?       string
+        +--rw period-start              yang:date-and-time
+        +--rw time-zone-identifier?     sys:timezone-name
+        +--rw (period-type)?
+        |  +--:(explicit)
+        |  |  +--rw period-end?         yang:date-and-time
+        |  +--:(duration)
+        |     +--rw duration?           duration
+        +--rw recurrence-first
+        |  +--rw utc-start-time?   yang:date-and-time
+        |  +--rw duration?         uint32
+        +--rw (recurrence-bound)?
+        |  +--:(until)
+        |  |  +--rw utc-until?          yang:date-and-time
+        |  +--:(count)
+        |     +--rw count?              uint32
+        +--rw recurrence-description?   string
+        +--rw frequency                 identityref
+        +--rw interval?                 uint32
+        +--rw test-sequence-status?     enumeration
 
 ~~~~
 {: #oam-test-sequence-tree-st title="OAM test sequence" artwork-align="center"}
@@ -307,7 +281,7 @@ This document proposes two models: OAM unitary test and OAM test sequence. OAM u
 ## YANG Model for Scheduling OAM Unitary Test
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-unitary-test@2023-07-10.yang
+<CODE BEGINS> file ietf-oam-unitary-test@2024-07-05.yang
 {::include ./Yang/ietf-oam-unitary-test.yang}
 
 <CODE ENDS>
@@ -316,7 +290,7 @@ This document proposes two models: OAM unitary test and OAM test sequence. OAM u
 ## YANG Model for OAM Test Sequence
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-test-sequence@2023-07-10.yang
+<CODE BEGINS> file ietf-oam-test-sequence@2024-07-05.yang
 
 {::include ./Yang/ietf-oam-test-sequence.yang}
 
