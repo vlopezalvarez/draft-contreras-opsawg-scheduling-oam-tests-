@@ -12,18 +12,25 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4 # Updated to use v4, compatible with Node.js 20
+      uses: actions/checkout@v4
+
+    - name: List YANG directory contents
+      run: ls -l YANG/
 
     - name: Export YANG files to TXT
       run: |
         mkdir -p txt
-        for file in ../../YANG/*.yang; do
-          filename=$(basename "$file" .yang)
-          cp "$file" "txt/$filename.txt"
+        for file in YANG/*.yang; do
+          if [ -f "$file" ]; then
+            filename=$(basename "$file" .yang)
+            cp "$file" "txt/$filename.txt"
+          else
+            echo "No .yang files found in YANG directory."
+          fi
         done
 
     - name: Upload TXT files as artifact
-      uses: actions/upload-artifact@v3 # Updated to use v3, compatible with Node.js 20
+      uses: actions/upload-artifact@v3
       with:
         name: yang-txt-files
         path: txt/
