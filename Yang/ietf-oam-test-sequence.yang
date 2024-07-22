@@ -25,7 +25,7 @@ module ietf-oam-test-sequence {
           <victor.lopez@nokia.com>";
   description
     "This module defines the 'oam-unitary-test' YANG model for
-    activation of network diagnosis procedures.
+    management of network diagnosis procedures.
 
     Copyright (c) 2024 IETF Trust and the persons identified as
     authors of the code.  All rights reserved.

@@ -52,13 +52,13 @@ module ietf-oam-unitary-test {
 
   grouping oam-unitary-test {
     description
-        "This grouping is defined for OAM unitary test for network
+        "Specifies a grouping for OAM unitary test for network
         diagnosis procedures.";
 
     leaf name {
       type string;
       description
-        "Name for the test.";
+        "Defines the name of the test.";
     }
 
     choice test-type {
