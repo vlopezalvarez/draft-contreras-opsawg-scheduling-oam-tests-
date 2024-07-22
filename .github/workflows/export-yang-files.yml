@@ -12,12 +12,7 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-
-    - name: Set up Python
-      uses: actions/setup-python@v3
-      with:
-        python-version: 3.x
+      uses: actions/checkout@v4 # Updated to use v4, compatible with Node.js 20
 
     - name: Export YANG files to TXT
       run: |
@@ -28,7 +23,7 @@ jobs:
         done
 
     - name: Upload TXT files as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v3 # Updated to use v3, compatible with Node.js 20
       with:
         name: yang-txt-files
         path: txt/
