@@ -46,15 +46,15 @@ This document defines a YANG data model for network diagnosis on-demand relying 
 
 # Introduction
 
-Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{!RFC7276}}). Given the emerging of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{!RFC8969}}, the management of OAM operations is key. Relevant data models are still missing to cover specific needs.
+Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{?RFC7276}}). Given the emerging of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, the management of OAM operations is key. Relevant data models are still missing to cover specific needs.
 
-Specifically, OAM functions provide the means to identify and isolate faults, measure and report of performance (see section 4.2, {{!RFC6632}}. For example, {{!RFC5860}} defines the three main areas involved in OAM:
+Specifically, OAM functions provide the means to identify and isolate faults, measure and report of performance (see section 4.2, {{?RFC6632}}. For example, {{!RFC5860}} defines the three main areas involved in OAM:
 
 * Fault management, which allows network operators to quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.
 + Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.
 - Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.
 
-{{!RFC7276}} presents OAM tools for detecting and isolating failures in networks and for performance monitoring, some examples are:
+{{?RFC7276}} presents OAM tools for detecting and isolating failures in networks and for performance monitoring, some examples are:
 
 * Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
 + Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple tecnologies for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet Loopback.
@@ -108,7 +108,7 @@ Please replace XXXX with the RFC number assigned to this document if the documen
 
 ## Troubleshooting
 
-After the detection of a problem {{!I-D.draft-davis-nmop-incident-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests, depends on the nature of the test itself.
+After the detection of a problem {{?I-D.draft-davis-nmop-incident-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests, depends on the nature of the test itself.
 
 There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its
    delivered performance).
@@ -128,15 +128,15 @@ Typically, once the birth certificate process has been completed and the OAM tes
 
 ## Proactive Supervision
 
-Some network services require to fulfill strict Service Level Agreements (SLAs).  An SLA defines the performance parameters that the service must fulfill in order to meet the requirements of the customer or end user (e.g., IP Connectivity Provisioning Profile (CPP) {{!RFC7297}} and Network Slice Service {{!RFC9543}}).
+Some network services require to fulfill strict Service Level Agreements (SLAs).  An SLA defines the performance parameters that the service must fulfill in order to meet the requirements of the customer or end user (e.g., IP Connectivity Provisioning Profile (CPP) {{?RFC7297}} and Network Slice Service {{?RFC9543}}).
 
-As part of service fulfillment and assurance (e.g., Section 2.3.3 of {{!RFC4176}}), proactive verification is undertaken to assess whether SLAs are met and implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on service components to identify early symptoms and resolve issues before they impact the customer or end user, or to prevent or minimize the impact of the end user. Mitigation action may be enforced to soften the impact of networks incidents and soften/nullify the impact on services that are delivered via that network.
+As part of service fulfillment and assurance (e.g., Section 2.3.3 of {{?RFC4176}}), proactive verification is undertaken to assess whether SLAs are met and implement appropriate adjustment measures when service distortion is observed. Proactive supervision requires running tests both end-to-end, but also on service components to identify early symptoms and resolve issues before they impact the customer or end user, or to prevent or minimize the impact of the end user. Mitigation action may be enforced to soften the impact of networks incidents and soften/nullify the impact on services that are delivered via that network.
 
 Proactive testing might be done via OAM tests. These tests can be run periodically at regular intervals depending on the specific SLA requirements and the network operator procedures. These procedures may require documenting the test results for future auditing processes with the customers (eventually, negotiated and agreed with a customer as part of service assurance).
 
 ## Performance-based Path Routing
 
-Path Computation Elements (PCEs) are used to compute end-to-end paths in a network {{!RFC4655}}. PCEs are used for Traffic Engineering (TE) purposes (e.g., optimize network performance, reduce congestion, and improve the overall user experience).
+Path Computation Elements (PCEs) are used to compute end-to-end paths in a network {{?RFC4655}}. PCEs are used for Traffic Engineering (TE) purposes (e.g., optimize network performance, reduce congestion, and improve the overall user experience).
 
 There are different algorithms to calculate a path in the network for some of them the PCE requires traffic engineering information. TE information includes data such as link metrics, bandwidth availability, and routing constraints. By using this information, the PCE can compute the optimal path for a particular service, taking into account its constraints and requirements. OAM techniques allow obtaining link metrics like delay and loss which can be used in the PCE algorithms.
 
