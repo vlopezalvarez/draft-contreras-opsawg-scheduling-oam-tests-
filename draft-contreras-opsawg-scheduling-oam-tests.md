@@ -37,6 +37,11 @@ normative:
 
 informative:
 
+   ITU-T-Y1731:
+              title: "OAM Functions and Mechanisms for Ethernet-based
+                 Networks"
+              date: 2023-06-13
+              target: https://www.itu.int/rec/T-REC-Y.1731/en
 
 --- abstract
 
@@ -58,8 +63,8 @@ Specifically, OAM functions provide the means to identify and isolate faults, me
 
 * Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
 + Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple tecnologies for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet Loopback.
-+ Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace or IP traceroute.
-- Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP, or Y.1731 DMM/SLM can obtain performance measurements.
++ Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace {{?ITU-T-Y1731}} or IP traceroute.
+- Performance Monitoring: This function allows a network operator to monitor the performance of a network and to identify and diagnose performance issues. Protocols like TWAMP, or Y.1731 DMM/SLM {{?ITU-T-Y1731}} can obtain performance measurements.
 
 More recently, Incident Management {{?I-D.ietf-nmop-network-incident-yang}} focuses on
    of incident diagnosis, which can be favored by dynamic invocation of OAM tests.
@@ -122,7 +127,7 @@ The aim of a birth certificate process is to validate that all
 
 If the birth certificate is successful, it means that the network service is functioning correctly (that is, measured service is matching the expected service) and meets the requirements defined by the operator. The process requires running a set of OAM tasks (e.g., tests) to verify that the service is performing as expected.
 
-The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual Private Network (VPN). Two-Way Active Measurement Protocol (TWAMP) Light {{!RFC5357}} will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests will be executed.
+The set of OAM tests conducted as part of a birth certificate process depends on the network service that is tested.  For example, if the service is a Virtual Private Network (VPN). Two-Way Active Measurement Protocol (TWAMP) Light {{!RFC5357}} will be used, while if the service is an E-LINE, ITU-T Y.1731 Ethernet CFM tests {{?ITU-T-Y1731}} will be executed.
 
 Typically, once the birth certificate process has been completed and the OAM tests have been executed, the test results are stored as part of the documentation process performed by the operator. Many of these tasks take place during pre-deployment phases.
 
