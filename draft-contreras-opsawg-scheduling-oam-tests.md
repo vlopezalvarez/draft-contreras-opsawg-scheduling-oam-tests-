@@ -106,14 +106,14 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 | yang   | ietf-yang-types        | {{!RFC6991}} |
 {: #tab-prefixes title="Prefixes and Corresponding YANG Modules"}
 
-RFC Editor Note:
-Please replace XXXX with the RFC number assigned to this document if the document becomes a RFC. Please remove this note in that case.
+> RFC Editor Note:
+> Please replace XXXX with the RFC number assigned to this document if the document becomes a RFC. Please remove this note in that case.
 
 # Network-wide OAM Use Cases
 
 ## Troubleshooting
 
-After the detection of a problem {{?I-D.draft-davis-nmop-incident-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests, depends on the nature of the test itself.
+After the detection of a problem {{?I-D.ietf-nmop-terminology}} in the network, OAM tests are performed to find the root cause for the detected problem. However, a detected problem can be caused by a variety of factors, such as a misconfiguration, hardware failure, or a software bug. OAM tests can help to find the root cause by testing specific components of the network and looking for anomalies or issues. Also, the reliability and efficiency of the tests, depends on the nature of the test itself.
 
 There are a variety of OAM tests that can be executed as a function of the target scenario. For example, if the issue is related to a Layer 2 capability, specific tests can be designed and run to check the status of the path via Ethernet Linktrace and later run an Ethernet Loopback to a concrete network element. These tests can be coupled with others to test if any filtering is in place by varying, e.g., some Layer 2 fields or checking the configuration of relevant nodes.  If these tests are correct, the operator may want to check the availability of the service (or its
    delivered performance).
