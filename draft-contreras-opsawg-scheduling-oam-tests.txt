@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 9 February 2025                                           Nokia
-                                                           8 August 2024
+Expires: 20 April 2025                                             Nokia
+                                                         17 October 2024
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 February 2025.
+   This Internet-Draft will expire on 20 April 2025.
 
 Copyright Notice
 
@@ -97,6 +97,8 @@ Table of Contents
    9.  References
      9.1.  Normative References
      9.2.  Informative References
+   Appendix A.  Examples
+     A.1.  Create a TWAMP OAM test
    Acknowledgments
    Authors' Addresses
 
@@ -827,9 +829,9 @@ Table of Contents
    [I-D.ietf-netmod-schedule-yang]
               Ma, Q., Wu, Q., Boucadair, M., and D. King, "A Common YANG
               Data Model for Scheduling", Work in Progress, Internet-
-              Draft, draft-ietf-netmod-schedule-yang-02, 25 June 2024,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-netmod-
-              schedule-yang-02>.
+              Draft, draft-ietf-netmod-schedule-yang-03, 10 October
+              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              netmod-schedule-yang-03>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -938,17 +940,17 @@ Table of Contents
               Hu, T., Contreras, L. M., Wu, Q., Davis, N., and C. Feng,
               "A YANG Data Model for Network Incident Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-network-
-              incident-yang-01, 28 June 2024,
+              incident-yang-02, 10 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              network-incident-yang-01>.
+              network-incident-yang-02>.
 
    [I-D.ietf-nmop-terminology]
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
-              Key Terms for Network Incident and Problem Management",
-              Work in Progress, Internet-Draft, draft-ietf-nmop-
-              terminology-02, 8 August 2024,
+              Key Terms for Network Fault and Problem Management", Work
+              in Progress, Internet-Draft, draft-ietf-nmop-terminology-
+              06, 17 October 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              terminology-02>.
+              terminology-06>.
 
    [ITU-T-Y1731]
               "OAM Functions and Mechanisms for Ethernet-based
@@ -992,6 +994,122 @@ Table of Contents
               Framework for Network Slices in Networks Built from IETF
               Technologies", RFC 9543, DOI 10.17487/RFC9543, March 2024,
               <https://www.rfc-editor.org/rfc/rfc9543>.
+
+Appendix A.  Examples
+
+   This section includes a non-exhaustive list of examples to illustrate
+   the use of the models defined in this document.
+
+A.1.  Create a TWAMP OAM test
+
+   [RFC8913] defines a YANG model for TWAMP.  There is an example for
+   TWAMP.  The following example contains the information for the four
+   configurations (Control-Client, Server, Session-Sender and Session-
+   Reflector).
+
+   An example of a request message body to create a TWAMP OAM test is
+   shown in Figure 5.  Session-Sender and Session-Reflector as expanded
+   for illustrative purposes.  The TWAMP Test scheduled in this
+   configuration is a one-hour performance monitoring test that runs
+   daily at 9 AM UTC.  This test session is configured to start on
+   October 17, 2023, at 09:00 UTC and recur at the same time every day.
+   The duration of each test run is one hour, as specified by the ISO
+   8601 format "PT1H", with the test status marked as "scheduled".  The
+   test provides insight into network performance by monitoring the
+   selected parameters, allowing for the detection of any potential
+   degradations in service quality over time.
+
+   {
+     "ietf-oam-unitary-test:oam-unitary-tests": {
+       "oam-unitary-test": [
+         {
+           "name": "TWAMP-Test-scheduled-daily",
+           "test-type": "oam-types:twamp-light-test",
+           "period-description": "TWAMP Light Test Period",
+           "period-start": "2023-10-17T09:00:00Z",
+           "time-zone-identifier": "UTC",
+           "period-type": {
+             "duration": {
+               "duration": "PT1H"
+             }
+           },
+           "recurrence-description": "Daily at 9 AM UTC",
+           "frequency": "oam-types:daily",
+           "interval": 1,
+           "unitary-test-status": "scheduled",
+           "twamp": {
+             "session-sender": {
+               "admin-state": true,
+               "test-session": [
+                 {
+                   "name": "Test1",
+                   "ctrl-connection-name": "RouterA",
+                   "fill-mode": "zero",
+                   "number-of-packets": 900,
+                   "periodic-interval": 1,
+                   "sent-packets": 2,
+                   "rcv-packets": 2,
+                   "last-sent-seq": 1,
+                   "last-rcv-seq": 1
+                 },
+                 {
+                   "name": "Test2",
+                   "ctrl-connection-name": "RouterA",
+                   "fill-mode": "random",
+                   "number-of-packets": 900,
+                   "lambda": 1,
+                   "max-interval": 2,
+                   "sent-packets": 21,
+                   "rcv-packets": 21,
+                   "last-sent-seq": 20,
+                   "last-rcv-seq": 20
+                 }
+               ]
+             },
+             "session-reflector": {
+               "admin-state": true,
+               "test-session": [
+                 {
+                   "sid": 1232,
+                   "sender-ip": "203.0.113.3",
+                   "sender-udp-port": 54000,
+                   "reflector-ip": "203.0.113.4",
+                   "reflector-udp-port": 55000,
+                   "parent-connection-client-ip": "203.0.113.1",
+                   "parent-connection-client-tcp-port": 16341,
+                   "parent-connection-server-ip": "203.0.113.2",
+                   "parent-connection-server-tcp-port": 862,
+                   "test-packet-dscp": 32,
+                   "sent-packets": 2,
+                   "rcv-packets": 2,
+                   "last-sent-seq": 1,
+                   "last-rcv-seq": 1
+                 },
+                 {
+                   "sid": 178943,
+                   "sender-ip": "203.0.113.1",
+                   "sender-udp-port": 54001,
+                   "reflector-ip": "192.0.2.2",
+                   "reflector-udp-port": 55001,
+                   "parent-connection-client-ip": "203.0.113.1",
+                   "parent-connection-client-tcp-port": 16341,
+                   "parent-connection-server-ip": "203.0.113.2",
+                   "parent-connection-server-tcp-port": 862,
+                   "test-packet-dscp": 32,
+                   "sent-packets": 21,
+                   "rcv-packets": 21,
+                   "last-sent-seq": 20,
+                   "last-rcv-seq": 20
+                 }
+               ]
+             }
+           }
+         }
+       ]
+     }
+   }
+
+       Figure 5: Example of a Message Body to Create a TWAMP OAM test
 
 Acknowledgments
 
