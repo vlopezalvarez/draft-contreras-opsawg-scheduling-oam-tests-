@@ -22,3 +22,5 @@ package-lock.json
 report.xml
 !requirements.txt
 Yang/.bash_logout
+.github/.DS_Store
+.DS_Store
