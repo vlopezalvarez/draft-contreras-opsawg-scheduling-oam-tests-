@@ -174,7 +174,6 @@ module: ietf-oam-unitary-test
 {: #oam-uni-test-tree-st title="Tree Structure of OAM Unitary Test" artwork-align="center"}
 
 (Note: alignment with {{!I-D.ietf-netmod-schedule-yang}} will be done with the progress of that document).
-
 The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. The state machine includes the following states:
 
 * "planned": The initial state where the test is planned.
