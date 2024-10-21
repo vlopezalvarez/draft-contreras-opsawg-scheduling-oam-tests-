@@ -16,7 +16,7 @@
         "frequency": "oam-types:daily",
         "interval": 1,
         "unitary-test-status": "scheduled",
-        "config": [
+        "ne-config": [
           {
             "ne-id": "203.0.113.3",
             "twamp": {
