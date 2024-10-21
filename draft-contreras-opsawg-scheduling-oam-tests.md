@@ -54,13 +54,11 @@ This document defines a YANG data model for network diagnosis on-demand relying 
 Operations, Administration, and Maintenance (OAM) tasks are fundamental functions of the network management (see, e.g., {{?RFC7276}}). Given the emergence of data models and their utilization in Service Provider's network management and the need to automate the overall service management lifecycle {{?RFC8969}}, the management of OAM operations becomes also key. Relevant data models are still missing to cover specific needs.
 
 Specifically, OAM functions provide the means to identify and isolate faults, measure and report of performance (see section 4.2, {{?RFC6632}}. For example, {{!RFC5860}} defines the three main areas involved in OAM:
-
 * Fault management, which allows network operators to quickly identify and isolate faults in the network. Examples of these mechanisms for fault detection and isolation are: continuity check, link trace, and loopback.
 + Performance management enables monitoring network performance and diagnosing performance issues (i.e., degradation). Some of the measurements such as frame delay measurement, frame delay variation measurement, and frame loss measurement.
 - Security management defines mechanisms to protect OAM communications from unauthorized access and tampering.
 
 {{?RFC7276}} presents OAM tools for detecting and isolating failures in networks and for performance monitoring, some examples are:
-
 * Continuity Check: This function verifies that a path exists between two points in a network and that the path is operational.
 + Loopback: This function allows a device to loop back a received packet back to the sender for diagnostic purposes. There are multiple technologies for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet Loopback.
 + Link Trace: This function allows a network operator to trace a path through a network from one device to another. Some technologies following this approach are Y.1731 Linktrace {{ITU-T-Y1731}} or IP traceroute.
@@ -83,9 +81,7 @@ The YANG data model resulting from this document will conform to the Network Man
 This document assumes that the reader is familiar with the contents of {{!RFC7950}}, {{!RFC8345}}, {{!RFC8346}} and {{!RFC8795}}.
 
 Following terms are used for the representation of this data model.
-
 * OAM unitary test: A set of parameters that define a type of OAM test to be invoked. As an example, it includes the type test, configuration parameters, and target results.
-
 * OAM test sequence: A set of OAM unitary tests that are run based on a set of time constraints, number of repetitions, order, and reporting outputs.
 
 Tree diagrams used in this document follow the notation defined in {{!RFC8340}}.
@@ -157,7 +153,8 @@ module: ietf-oam-unitary-test
   +--rw oam-unitary-tests
      +--rw oam-unitary-test* [name]
         +--rw name                      string
-        +--rw (test-type)
+        +--rw ne-config* [ne-id]
+           +--:(test-type)
         +--rw period-description?       string
         +--rw period-start              yang:date-and-time
         +--rw time-zone-identifier?     sys:timezone-name
@@ -175,7 +172,6 @@ module: ietf-oam-unitary-test
 
 (Note: alignment with {{!I-D.ietf-netmod-schedule-yang}} will be done with the progress of that document).
 The 'unitary-test-status' state machine is shown in {{st-unitary-test-status}}. The state machine includes the following states:
-
 * "planned": The initial state where the test is planned.
 * "configured": The state where the test is being configured.
 * "ready": The state where the test is ready to be executed.
@@ -250,7 +246,6 @@ module: ietf-oam-test-sequence
 
 
 The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}. The state machine includes the following states:
-
 * "planned": The initial state where the test is planned.
 * "configured": The state where the test is being configured.
 * "ready": The state where the test is ready to be executed.
@@ -308,9 +303,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 # Using Device Mode Within OAM Scheduling Models
 
 This section discusses the issues related to reusing device models already defined in IETF within the context of scheduling OAM tests. There are two main approaches to enable OAM scheduling models:
-  
   * Importing YANG model into the OAM scheduling models. This approach will copy the device model into the OAM unitary test model to enable the configuration and utilization of the desired OAM test. This approach requires to recreate new YANG models for each new test type or variation of the device models.
-  
   * Schema-mount allows mounting a data model at a specified location of another (parent) schema. The main difference with importing the YANG modules is that they don't have to be prepared for mounting; any existing modules such as "ietf-twamp" can be mounted without any modifications.
 
 As an exmaple, we will use {{!RFC8913}}, which defines a YANG data model for TWAMP, to illustrate how device models could be used.
