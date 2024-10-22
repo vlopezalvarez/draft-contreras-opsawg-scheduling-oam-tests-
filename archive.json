@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-20T01:13:13.247719+00:00",
+  "timestamp": "2024-10-22T01:08:20.857279+00:00",
   "repo": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
   "labels": [
     {
@@ -183,6 +183,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOJ4Oz985_ViJj",
+      "title": "Update draft-contreras-opsawg-scheduling-oam-tests.md",
+      "url": "https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests/pull/6",
+      "state": "OPEN",
+      "author": "luismcontreras",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Editorial changes\r\nModification of the first state machine",
+      "createdAt": "2024-10-21T15:10:30Z",
+      "updatedAt": "2024-10-21T21:41:01Z",
+      "baseRepository": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
+      "baseRefName": "main",
+      "baseRefOid": "7b49d4576b33268db9fbd695f644f4a89ba2597d",
+      "headRepository": "vlopezalvarez/draft-contreras-opsawg-scheduling-oam-tests",
+      "headRefName": "luismcontreras-patch-2",
+      "headRefOid": "e0733db8172d85e21c270581006530ed632288ac",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
