@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 21 April 2025                                             Nokia
-                                                         18 October 2024
+Expires: 12 May 2025                                               Nokia
+                                                         8 November 2024
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 April 2025.
+   This Internet-Draft will expire on 12 May 2025.
 
 Copyright Notice
 
@@ -106,11 +106,11 @@ Table of Contents
 
    Operations, Administration, and Maintenance (OAM) tasks are
    fundamental functions of the network management (see, e.g.,
-   [RFC7276]).  Given the emerging of data models and their utilization
+   [RFC7276]).  Given the emergence of data models and their utilization
    in Service Provider's network management and the need to automate the
    overall service management lifecycle [RFC8969], the management of OAM
-   operations is key.  Relevant data models are still missing to cover
-   specific needs.
+   operations becomes also key.  Relevant data models are still missing
+   to cover specific needs.
 
    Specifically, OAM functions provide the means to identify and isolate
    faults, measure and report of performance (see section 4.2,
@@ -138,7 +138,7 @@ Table of Contents
 
    *  Loopback: This function allows a device to loop back a received
       packet back to the sender for diagnostic purposes.  There are
-      multiple tecnologies for this function, like IP Ping, VCCV Ping,
+      multiple technologies for this function, like IP Ping, VCCV Ping,
       LSP Ping or Ethernet Loopback.
 
    *  Link Trace: This function allows a network operator to trace a
@@ -238,8 +238,8 @@ Table of Contents
    variety of factors, such as a misconfiguration, hardware failure, or
    a software bug.  OAM tests can help to find the root cause by testing
    specific components of the network and looking for anomalies or
-   issues.  Also, the reliability and efficiency of the tests, depends
-   on the nature of the test itself.
+   issues.  Also, the reliability and efficiency of the tests depend on
+   the nature of the test itself.
 
    There are a variety of OAM tests that can be executed as a function
    of the target scenario.  For example, if the issue is related to a
@@ -261,7 +261,7 @@ Table of Contents
    The aim of a birth certificate process is to validate that all
    relevant parameters are set appropriately in accordance with the
    target network service.  The birth certificate process is done once
-   the configuration of the network elements is completed and they are
+   the configuration of the network elements is completed, and they are
    ready for service.
 
    If the birth certificate is successful, it means that the network
@@ -354,7 +354,8 @@ Table of Contents
           +--rw oam-unitary-tests
              +--rw oam-unitary-test* [name]
                 +--rw name                      string
-                +--rw (test-type)
+                +--rw ne-config* [ne-id]
+                   +--:(test-type)
                 +--rw period-description?       string
                 +--rw period-start              yang:date-and-time
                 +--rw time-zone-identifier?     sys:timezone-name
@@ -370,8 +371,10 @@ Table of Contents
 
                 Figure 1: Tree Structure of OAM Unitary Test
 
-   The 'unitary-test-status' state machine is shown in Figure 2.  The
-   state machine includes the following states:
+   (Note: alignment with [I-D.ietf-netmod-schedule-yang] will continue
+   with the progress of that document).  The 'unitary-test-status' state
+   machine is shown in Figure 2.  The state machine includes the
+   following states:
 
    *  "planned": The initial state where the test is planned.
 
@@ -390,10 +393,10 @@ Table of Contents
                 +---------+      +----------+      +---------+
              +->| planned |----->|configured|----->|  ready  |
              |  +---------+      +----------+      +---------+
-             |      A                 |                |
-             |      |                 |                V
-             |      |     +-------+   |          +----------+
-             |      ------| error |<--+----------| on-going |
+             |                        |                |
+             |                        |                V
+             |            +-------+   |          +----------+
+             |      +-----| error |<--+----------| on-going |
              |      |     +-------+              +----------+
              |      |                                  |
              |      V                                  |
@@ -511,7 +514,17 @@ Table of Contents
      // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
 
      // reference ietf-netmod-schedule-yang
-     import ietf-schedule { prefix "schedule"; }
+     import ietf-schedule {
+       prefix schedule;
+       reference
+         "RFC XXXX: A Common YANG Data Model for Scheduling";
+     }
+
+     import ietf-routing-types {
+       prefix rt-types;
+       reference
+         "RFC 8294: Common YANG Data Types for the Routing Area";
+     }
 
      organization
        "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -566,11 +579,24 @@ Table of Contents
            "Defines the name of the test.";
        }
 
-       choice test-type {
-         mandatory true;
-         description
-           "Choose the type of test.";
-           // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+       list ne-config {
+         key ne-id;
+         description "List of node configurations required to enable the
+           unitary tests.";
+
+         leaf ne-id {
+           type rt-types:router-id;
+           description
+             "A 32-bit number in the dotted-quad format that is used
+               to uniquely identify a node within an autonomous system
+               the ne-id. This identifier is used for both IPv4 and IPv6.";
+         }
+         choice test-type {
+           mandatory true;
+           description
+             "Choose the type of test. Pending to add the schema-mount solution";
+             // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+         }
        }
      }
 
@@ -775,7 +801,7 @@ Table of Contents
    There are two main approaches to enable OAM scheduling models: *
    Importing YANG model into the OAM scheduling models.  This approach
    will copy the device model into the OAM unitary test model to enable
-   the configuration and utilization of the desire OAM test.  This
+   the configuration and utilization of the desired OAM test.  This
    approach requires to recreate new YANG models for each new test type
    or variation of the device models.  * Schema-mount allows mounting a
    data model at a specified location of another (parent) schema.  The
@@ -948,9 +974,9 @@ Table of Contents
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
               Key Terms for Network Fault and Problem Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-terminology-
-              06, 17 October 2024,
+              07, 3 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              terminology-06>.
+              terminology-07>.
 
    [ITU-T-Y1731]
               "OAM Functions and Mechanisms for Ethernet-based
