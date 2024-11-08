@@ -1466,7 +1466,8 @@ module: ietf-oam-unitary-test
      +--rw oam-unitary-test* [name]
         +--rw name                      string
         +--rw ne-config* [ne-id]
-           +--:(test-type)
+        |  +--rw ne-id    rt-types:router-id
+        |  +--rw (test-type)
         +--rw period-description?       string
         +--rw period-start              yang:date-and-time
         +--rw time-zone-identifier?     sys:timezone-name
@@ -1656,7 +1657,7 @@ module: ietf-oam-test-sequence
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-yang-model-for-scheduling-o" class="section-name selfRef">YANG Model for Scheduling OAM Unitary Test</a>
         </h3>
 <div class="breakable sourcecode" id="section-4.1-1">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2024-07-05.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-unitary-test@2024-11-08.yang
 module ietf-oam-unitary-test {
   yang-version 1.1;
   namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
@@ -1710,7 +1711,7 @@ module ietf-oam-unitary-test {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2024-07-05" {
+  revision "2024-11-08" {
     description
       "Initial version";
     reference
@@ -1817,7 +1818,7 @@ module ietf-oam-unitary-test {
 <a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-yang-model-for-oam-test-seq" class="section-name selfRef">YANG Model for OAM Test Sequence</a>
         </h3>
 <div class="breakable sourcecode" id="section-4.2-1">
-<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2024-07-05.yang
+<pre>&lt;CODE BEGINS&gt; file ietf-oam-test-sequence@2024-11-08.yang
 
 module ietf-oam-test-sequence {
   yang-version 1.1;
@@ -1867,7 +1868,7 @@ module ietf-oam-test-sequence {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2024-07-05" {
+  revision "2024-11-08" {
     description "Initial version";
     reference "RFCXXXX";
     // Update with the correct RFC number when assigned
@@ -2180,7 +2181,7 @@ module ietf-oam-test-sequence {
         "frequency": "oam-types:daily",
         "interval": 1,
         "unitary-test-status": "scheduled",
-        "config": [
+        "ne-config": [
           {
             "ne-id": "203.0.113.3",
             "twamp": {
