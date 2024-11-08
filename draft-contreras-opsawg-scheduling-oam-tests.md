@@ -159,7 +159,8 @@ module: ietf-oam-unitary-test
      +--rw oam-unitary-test* [name]
         +--rw name                      string
         +--rw ne-config* [ne-id]
-           +--:(test-type)
+        |  +--rw ne-id    rt-types:router-id
+        |  +--rw (test-type)
         +--rw period-description?       string
         +--rw period-start              yang:date-and-time
         +--rw time-zone-identifier?     sys:timezone-name
@@ -291,7 +292,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 ## YANG Model for Scheduling OAM Unitary Test
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-unitary-test@2024-07-05.yang
+<CODE BEGINS> file ietf-oam-unitary-test@2024-11-08.yang
 {::include ./Yang/ietf-oam-unitary-test.yang}
 
 <CODE ENDS>
@@ -300,7 +301,7 @@ The 'test-sequence-status' state machine is shown in {{st-test-sequence-status}}
 ## YANG Model for OAM Test Sequence
 
 ~~~~~~~~~~
-<CODE BEGINS> file ietf-oam-test-sequence@2024-07-05.yang
+<CODE BEGINS> file ietf-oam-test-sequence@2024-11-08.yang
 
 {::include ./Yang/ietf-oam-test-sequence.yang}
 

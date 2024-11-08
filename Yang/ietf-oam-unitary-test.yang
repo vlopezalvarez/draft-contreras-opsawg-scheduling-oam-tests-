@@ -51,7 +51,7 @@ module ietf-oam-unitary-test {
   // RFC Ed.: replace XXXX with actual RFC number and remove
   // this note.
 
-  revision "2024-07-05" {
+  revision "2024-11-08" {
     description
       "Initial version";
     reference
