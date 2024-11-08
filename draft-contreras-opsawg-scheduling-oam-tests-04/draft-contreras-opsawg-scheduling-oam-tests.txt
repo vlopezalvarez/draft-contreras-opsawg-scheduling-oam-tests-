@@ -355,7 +355,8 @@ Table of Contents
              +--rw oam-unitary-test* [name]
                 +--rw name                      string
                 +--rw ne-config* [ne-id]
-                   +--:(test-type)
+                |  +--rw ne-id    rt-types:router-id
+                |  +--rw (test-type)
                 +--rw period-description?       string
                 +--rw period-start              yang:date-and-time
                 +--rw time-zone-identifier?     sys:timezone-name
@@ -505,7 +506,7 @@ Table of Contents
 4.1.  YANG Model for Scheduling OAM Unitary Test
 
    <CODE BEGINS>
-    file ietf-oam-unitary-test@2024-07-05.yang
+    file ietf-oam-unitary-test@2024-11-08.yang
    module ietf-oam-unitary-test {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
@@ -559,7 +560,7 @@ Table of Contents
      // RFC Ed.: replace XXXX with actual RFC number and remove
      // this note.
 
-     revision "2024-07-05" {
+     revision "2024-11-08" {
        description
          "Initial version";
        reference
@@ -659,7 +660,7 @@ Table of Contents
 4.2.  YANG Model for OAM Test Sequence
 
    <CODE BEGINS>
-    file ietf-oam-test-sequence@2024-07-05.yang
+    file ietf-oam-test-sequence@2024-11-08.yang
 
    module ietf-oam-test-sequence {
      yang-version 1.1;
@@ -709,7 +710,7 @@ Table of Contents
      // RFC Ed.: replace XXXX with actual RFC number and remove
      // this note.
 
-     revision "2024-07-05" {
+     revision "2024-11-08" {
        description "Initial version";
        reference "RFCXXXX";
        // Update with the correct RFC number when assigned
@@ -1063,7 +1064,7 @@ A.1.  Create a TWAMP OAM test
            "frequency": "oam-types:daily",
            "interval": 1,
            "unitary-test-status": "scheduled",
-           "config": [
+           "ne-config": [
              {
                "ne-id": "203.0.113.3",
                "twamp": {
