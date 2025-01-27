@@ -5,13 +5,13 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 24 April 2025                                             Nokia
-                                                         21 October 2024
+Expires: 31 July 2025                                              Nokia
+                                                         27 January 2025
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
                                  Tests
-           draft-contreras-opsawg-scheduling-oam-tests-latest
+             draft-ietf-opsawg-scheduling-oam-tests-latest
 
 Abstract
 
@@ -26,11 +26,11 @@ About This Document
    This note is to be removed before publishing as an RFC.
 
    The latest revision of this draft can be found at
-   https://vlopezalvarez.github.io/draft-contreras-opsawg-scheduling-
-   oam-tests/draft-contreras-opsawg-scheduling-oam-tests.html.  Status
+   https://vlopezalvarez.github.io/draft-ietf-opsawg-scheduling-oam-
+   tests/draft-ietf-opsawg-scheduling-oam-tests.html.  Status
    information for this document may be found at
-   https://datatracker.ietf.org/doc/draft-contreras-opsawg-scheduling-
-   oam-tests/.
+   https://datatracker.ietf.org/doc/draft-ietf-opsawg-scheduling-oam-
+   tests/.
 
    Discussion of this document takes place on the Operations and
    Management Area Working Group Working Group mailing list
@@ -39,8 +39,8 @@ About This Document
    https://www.ietf.org/mailman/listinfo/opsawg/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/vlopezalvarez/draft-contreras-opsawg-scheduling-
-   oam-tests.
+   https://github.com/vlopezalvarez/draft-ietf-opsawg-scheduling-oam-
+   tests.
 
 Status of This Memo
 
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 24 April 2025.
+   This Internet-Draft will expire on 31 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -115,31 +115,41 @@ Table of Contents
    Specifically, OAM functions provide the means to identify and isolate
    faults, measure and report of performance (see section 4.2,
    [RFC6632].  For example, [RFC5860] defines the three main areas
-   involved in OAM: * Fault management, which allows network operators
-   to quickly identify and isolate faults in the network.  Examples of
-   these mechanisms for fault detection and isolation are: continuity
-   check, link trace, and loopback. + Performance management enables
-   monitoring network performance and diagnosing performance issues
-   (i.e., degradation).  Some of the measurements such as frame delay
-   measurement, frame delay variation measurement, and frame loss
-   measurement. - Security management defines mechanisms to protect OAM
-   communications from unauthorized access and tampering.
+   involved in OAM:
+
+   *  Fault management, which allows network operators to quickly
+      identify and isolate faults in the network.  Examples of these
+      mechanisms for fault detection and isolation are: continuity
+      check, link trace, and loopback.
+
+   *  Performance management enables monitoring network performance and
+      diagnosing performance issues (i.e., degradation).  Some of the
+      measurements such as frame delay measurement, frame delay
+      variation measurement, and frame loss measurement.
+
+   *  Security management defines mechanisms to protect OAM
+      communications from unauthorized access and tampering.
 
    [RFC7276] presents OAM tools for detecting and isolating failures in
-   networks and for performance monitoring, some examples are: *
-   Continuity Check: This function verifies that a path exists between
-   two points in a network and that the path is operational. + Loopback:
-   This function allows a device to loop back a received packet back to
-   the sender for diagnostic purposes.  There are multiple technologies
-   for this function, like IP Ping, VCCV Ping, LSP Ping or Ethernet
-   Loopback. + Link Trace: This function allows a network operator to
-   trace a path through a network from one device to another.  Some
-   technologies following this approach are Y.1731 Linktrace
-   [ITU-T-Y1731] or IP traceroute. - Performance Monitoring: This
-   function allows a network operator to monitor the performance of a
-   network and to identify and diagnose performance issues.  Protocols
-   like TWAMP, or Y.1731 DMM/SLM [ITU-T-Y1731] can obtain performance
-   measurements.
+   networks and for performance monitoring, some examples are:
+
+   *  Continuity Check: This function verifies that a path exists
+      between two points in a network and that the path is operational.
+
+   *  Loopback: This function allows a device to loop back a received
+      packet back to the sender for diagnostic purposes.  There are
+      multiple technologies for this function, like IP Ping, VCCV Ping,
+      LSP Ping or Ethernet Loopback.
+
+   *  Link Trace: This function allows a network operator to trace a
+      path through a network from one device to another.  Some
+      technologies following this approach are Y.1731 Linktrace
+      [ITU-T-Y1731] or IP traceroute.
+
+   *  Performance Monitoring: This function allows a network operator to
+      monitor the performance of a network and to identify and diagnose
+      performance issues.  Protocols like TWAMP, or Y.1731 DMM/SLM
+      [ITU-T-Y1731] can obtain performance measurements.
 
    More recently, Incident Management
    [I-D.ietf-nmop-network-incident-yang] focuses on of incident
@@ -157,9 +167,10 @@ Table of Contents
    Connectivity Verification). + [RFC8533] provides a YANG data model
    that can be used to retrieve information related to OAM protocols
    such as Bidirectional Forwarding Detection (BFD), Loopback Messaging
-   (LBM) and Virtual Circuit Connectivity Verification (VCCV). +
+   (LBM) and Virtual Circuit Connectivity Verification (VCCV). -
    [RFC8913] specifies a YANG data model for client and server
    implementations of the Two-Way Active Measurement Protocol (TWAMP).
+
    These RFCs defined the parameters required for each of the different
    tests that are used in network elements today.  This document covers
    how to use OAM for network-wide use cases.  Following, some
@@ -173,12 +184,15 @@ Table of Contents
    This document assumes that the reader is familiar with the contents
    of [RFC7950], [RFC8345], [RFC8346] and [RFC8795].
 
-   Following terms are used for the representation of this data model. *
-   OAM unitary test: A set of parameters that define a type of OAM test
-   to be invoked.  As an example, it includes the type test,
-   configuration parameters, and target results. * OAM test sequence: A
-   set of OAM unitary tests that are run based on a set of time
-   constraints, number of repetitions, order, and reporting outputs.
+   Following terms are used for the representation of this data model.
+
+   *  OAM unitary test: A set of parameters that define a type of OAM
+      test to be invoked.  As an example, it includes the type test,
+      configuration parameters, and target results.
+
+   *  OAM test sequence: A set of OAM unitary tests that are run based
+      on a set of time constraints, number of repetitions, order, and
+      reporting outputs.
 
    Tree diagrams used in this document follow the notation defined in
    [RFC8340].
@@ -341,7 +355,8 @@ Table of Contents
              +--rw oam-unitary-test* [name]
                 +--rw name                      string
                 +--rw ne-config* [ne-id]
-                   +--:(test-type)
+                |  +--rw ne-id    rt-types:router-id
+                |  +--rw (test-type)
                 +--rw period-description?       string
                 +--rw period-start              yang:date-and-time
                 +--rw time-zone-identifier?     sys:timezone-name
@@ -357,16 +372,24 @@ Table of Contents
 
                 Figure 1: Tree Structure of OAM Unitary Test
 
-   (Note: alignment with [I-D.ietf-netmod-schedule-yang] will be done
+   (Note: alignment with [I-D.ietf-netmod-schedule-yang] will continue
    with the progress of that document).  The 'unitary-test-status' state
    machine is shown in Figure 2.  The state machine includes the
-   following states: * "planned": The initial state where the test is
-   planned. * "configured": The state where the test is being
-   configured. * "ready": The state where the test is ready to be
-   executed. * "on-going": The state where the test is currently
-   running. * "stop": The state where the test is manually stopped. *
-   "error": The state where an error occurs during the test. *
-   "finished": The final state where the test is completed.
+   following states:
+
+   *  "planned": The initial state where the test is planned.
+
+   *  "configured": The state where the test is being configured.
+
+   *  "ready": The state where the test is ready to be executed.
+
+   *  "on-going": The state where the test is currently running.
+
+   *  "stop": The state where the test is manually stopped.
+
+   *  "error": The state where an error occurs during the test.
+
+   *  "finished": The final state where the test is completed.
 
                 +---------+      +----------+      +---------+
              +->| planned |----->|configured|----->|  ready  |
@@ -379,7 +402,7 @@ Table of Contents
              |      |                                  |
              |      V                                  |
              |  +---------+      +--------+            |
-             +--| finished|<-----|  stop  |<-----------+
+             +--| finished|<-----|  stop  |<------------+
                 +---------+      +--------+            |
                     A                                  |
                     |                                  |
@@ -439,15 +462,24 @@ Table of Contents
                         Figure 3: OAM test sequence
 
    The 'test-sequence-status' state machine is shown in Figure 4.  The
-   state machine includes the following states: * "planned": The initial
-   state where the test is planned. * "configured": The state where the
-   test is being configured. * "ready": The state where the test is
-   ready to be executed. * "on-going": The state where the test is
-   currently running. * "stop": The state where the test is manually
-   stopped. * "success": The state when all unitary tests were
-   successful. * "failure": The state when one or more tests in the
-   sequence got an error. * "error": The state where an error occurs
-   during the test.
+   state machine includes the following states:
+
+   *  "planned": The initial state where the test is planned.
+
+   *  "configured": The state where the test is being configured.
+
+   *  "ready": The state where the test is ready to be executed.
+
+   *  "on-going": The state where the test is currently running.
+
+   *  "stop": The state where the test is manually stopped.
+
+   *  "success": The state when all unitary tests were successful.
+
+   *  "failure": The state when one or more tests in the sequence got an
+      error.
+
+   *  "error": The state where an error occurs during the test.
 
                 +---------+      +----------+      +---------+
              +->| planned |----->|configured|----->|  ready  |
@@ -474,7 +506,7 @@ Table of Contents
 4.1.  YANG Model for Scheduling OAM Unitary Test
 
    <CODE BEGINS>
-    file ietf-oam-unitary-test@2024-07-05.yang
+    file ietf-oam-unitary-test@2024-11-08.yang
    module ietf-oam-unitary-test {
      yang-version 1.1;
      namespace "urn:ietf:params:xml:ns:yang:ietf-oam-unitary-test";
@@ -483,7 +515,17 @@ Table of Contents
      // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
 
      // reference ietf-netmod-schedule-yang
-     import ietf-schedule { prefix "schedule"; }
+     import ietf-schedule {
+       prefix schedule;
+       reference
+         "RFC XXXX: A Common YANG Data Model for Scheduling";
+     }
+
+     import ietf-routing-types {
+       prefix rt-types;
+       reference
+         "RFC 8294: Common YANG Data Types for the Routing Area";
+     }
 
      organization
        "IETF OPSAWG (Operations and Management Area Working Group)";
@@ -518,7 +560,7 @@ Table of Contents
      // RFC Ed.: replace XXXX with actual RFC number and remove
      // this note.
 
-     revision "2024-07-05" {
+     revision "2024-11-08" {
        description
          "Initial version";
        reference
@@ -538,11 +580,24 @@ Table of Contents
            "Defines the name of the test.";
        }
 
-       choice test-type {
-         mandatory true;
-         description
-           "Choose the type of test.";
-           // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+       list ne-config {
+         key ne-id;
+         description "List of node configurations required to enable the
+           unitary tests.";
+
+         leaf ne-id {
+           type rt-types:router-id;
+           description
+             "A 32-bit number in the dotted-quad format that is used
+               to uniquely identify a node within an autonomous system
+               the ne-id. This identifier is used for both IPv4 and IPv6.";
+         }
+         choice test-type {
+           mandatory true;
+           description
+             "Choose the type of test. Pending to add the schema-mount solution";
+             // Import OAM models from RFCs RFC8531, RFC8532 and RFC8533
+         }
        }
      }
 
@@ -605,7 +660,7 @@ Table of Contents
 4.2.  YANG Model for OAM Test Sequence
 
    <CODE BEGINS>
-    file ietf-oam-test-sequence@2024-07-05.yang
+    file ietf-oam-test-sequence@2024-11-08.yang
 
    module ietf-oam-test-sequence {
      yang-version 1.1;
@@ -655,7 +710,7 @@ Table of Contents
      // RFC Ed.: replace XXXX with actual RFC number and remove
      // this note.
 
-     revision "2024-07-05" {
+     revision "2024-11-08" {
        description "Initial version";
        reference "RFCXXXX";
        // Update with the correct RFC number when assigned
@@ -920,9 +975,9 @@ Table of Contents
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
               Key Terms for Network Fault and Problem Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-terminology-
-              06, 17 October 2024,
+              10, 21 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              terminology-06>.
+              terminology-10>.
 
    [ITU-T-Y1731]
               "OAM Functions and Mechanisms for Ethernet-based

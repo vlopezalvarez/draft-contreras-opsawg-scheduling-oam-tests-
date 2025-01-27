@@ -5,8 +5,8 @@
 Operations and Management Area Working Group             L. M. Contreras
 Internet-Draft                                                Telefonica
 Intended status: Informational                                  V. Lopez
-Expires: 12 May 2025                                               Nokia
-                                                         8 November 2024
+Expires: 31 July 2025                                              Nokia
+                                                         27 January 2025
 
 
 A YANG Data Model for Network Diagnosis using Scheduled Sequences of OAM
@@ -57,11 +57,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 May 2025.
+   This Internet-Draft will expire on 31 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -975,9 +975,9 @@ Table of Contents
               Davis, N., Farrel, A., Graf, T., Wu, Q., and C. Yu, "Some
               Key Terms for Network Fault and Problem Management", Work
               in Progress, Internet-Draft, draft-ietf-nmop-terminology-
-              07, 3 November 2024,
+              10, 21 January 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-nmop-
-              terminology-07>.
+              terminology-10>.
 
    [ITU-T-Y1731]
               "OAM Functions and Mechanisms for Ethernet-based
